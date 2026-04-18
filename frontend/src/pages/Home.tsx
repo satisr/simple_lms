@@ -6,7 +6,7 @@ import { Typography, List, ListItem, ListItemButton, ListItemText, Paper, Divide
 export default function Home() {
   const [subjects, setSubjects] = useState<any[]>([]);
   useEffect(() => {
-    axios.get('http://localhost:3000/api/subjects').then(res => setSubjects(res.data)).catch(console.error);
+    axios.get(`${import.meta.env.VITE_API_URL}/subjects`).then(res => setSubjects(res.data)).catch(console.error);
   }, []);
   return (
     <div style={{ padding: '2rem 0' }}>

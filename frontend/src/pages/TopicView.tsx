@@ -9,12 +9,12 @@ export default function TopicView() {
   const [solutions, setSolutions] = useState<{ [key: number]: string }>({});
   const [email, setEmail] = useState('');
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/topics/${id}`).then(res => setTopic(res.data)).catch(console.error);
+    axios.get(`${import.meta.env.VITE_API_URL}/topics/${id}`).then(res => setTopic(res.data)).catch(console.error);
   }, [id]);
 
   const handleSubmit = async (taskId: number) => {
     try {
-      await axios.post('http://localhost:3000/api/tasks/submit', { taskId, studentEmail: email, solution: solutions[taskId] });
+      await axios.post(`${import.meta.env.VITE_API_URL}/tasks/submit`, { taskId, studentEmail: email, solution: solutions[taskId] });
       alert('Rozwiązanie wysłane!');
     } catch (err) { alert('Błąd wysyłania rozwiązania.'); }
   };

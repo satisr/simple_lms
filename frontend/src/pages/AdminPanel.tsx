@@ -19,7 +19,7 @@ export default function AdminPanel() {
 
   useEffect(() => { if (!token) navigate('/login'); }, [token, navigate]);
 
-  const api = axios.create({ baseURL: 'http://localhost:3000/api/admin', headers: { Authorization: `Bearer ${token}` } });
+  const api = axios.create({ baseURL: `${import.meta.env.VITE_API_URL}/admin`, headers: { Authorization: `Bearer ${token}` } });
 
   const handleAddSubject = async () => {
     try {
