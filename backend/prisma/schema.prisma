@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+}
+
+model Subject {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  modules     Module[]
+}
+
+model Module {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+  subjectId   Int
+  subject     Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  topics      Topic[]
+}
+
+model Topic {
+  id          Int     @id @default(autoincrement())
+  name        String
+  content     String
+  moduleId    Int
+  module      Module  @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  tasks       Task[]
+}
+
+model Task {
+  id          Int     @id @default(autoincrement())
+  question    String
+  topicId     Int
+  topic       Topic   @relation(fields: [topicId], references: [id], onDelete: Cascade)
+}
