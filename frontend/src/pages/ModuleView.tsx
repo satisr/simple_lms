@@ -7,7 +7,7 @@ export default function ModuleView() {
   const { id } = useParams();
   const [module, setModule] = useState<any>(null);
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/modules/${id}`).then(res => setModule(res.data)).catch(console.error);
+    axios.get(`${import.meta.env.VITE_API_URL}/modules/${id}`).then(res => setModule(res.data)).catch(console.error);
   }, [id]);
   if (!module) return <div>Ładowanie...</div>;
   return (

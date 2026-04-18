@@ -128,6 +128,10 @@ app.post('/api/admin/tasks', authenticate, async (req, res) => {
   } catch (error) { res.status(500).json({ error: 'Błąd' }); }
 });
 
-app.listen(PORT, () => {
-  console.log(`Serwer działa na http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Serwer działa na http://localhost:${PORT}`);
+  });
+}
+
+export default app;
